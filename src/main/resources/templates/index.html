@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+    <!--import all in file head.html -->
+    <th:block th:replace="~{/layout/head.html}" />
+
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+
+    <!--import all in file menu.html -->
+    <th:block th:replace="~{/layout/menu.html}" />
+
+    <!--import all in file cart.html -->
+    <th:block th:replace="~{/layout/cart.html}" />
+
+    <div class="banner">
+        <div class="banner-content">
+            <div class="banner-subtitle">Trending Item</div>
+            <div class="banner-title">Women's latest fashion sale</div>
+            <div class="banner-text">starting at 20$</div>
+            <a href="" class="banner-btn">Shop now</a>
+        </div>
+    </div>
+
+    <main>
+
+        <!--import all in file categories.html -->
+        <th:block th:replace="~{/layout/categories.html}" />
+
+        <div class="right">
+            <div class="right-title">
+                <h3>New Arrivals</h3>
+                <ul class="items">
+                    <li class="item" th:each="product : ${products}">
+                        <img class="item-image" th:src="@{/images/products/{productUrl}(productUrl=${product.img})}" alt="image of product">
+                        <div class="title-item">
+                            <a style="text-decoration: none; color: black" class="item-name" th:href="@{/products/detail/{id}(id = ${product.id})}" th:text="${product.name}"></a>
+                            <div class="item-amount">Amount: [[${product.amount}]]</div>
+                            <div class="item-price">Price: [[${product.price}]] $</div>
+                            <button th:attr="ng-click=@{|cart.addToCart(${product.id})|}" class="item-btn" >Add to cart</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

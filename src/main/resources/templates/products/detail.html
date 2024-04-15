@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{/layout/head.html}"/>
+    <title>Detail</title>
+
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+    <th:block th:replace="~{/layout/menu.html}" />
+    <th:block th:replace="~{/layout/cart.html}" />
+    <main>
+        <div class="left">
+            <th:block th:replace="~{/layout/categories.html}" />
+            <div class="list">
+                <h3>Same Products</h3>
+                <ul class="titles">
+                    <li class="title-items" th:each="item : ${sameCategory}">
+                        <p class="title-item">
+                            <a style="text-decoration: none; color: black" th:href="@{/products/detail/{id}(id = ${item.id})}" th:text="${item.name}"></a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="item">
+                <img class="item-image" th:src="@{/images/products/{productUrl}(productUrl=${products.img})}">
+                <div class="item-info">
+                    <div class="item-name">Name: [[${products.name}]]</div>
+                    <div class="item-amount">Amount: [[${products.amount}]]</div>
+                    <div class="item-price">Price: [[${products.price}]]</div>
+                    <button th:attr="ng-click=@{|cart.addToCart(${products.id})|}" class="banner-btn" th:onclick="" >Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

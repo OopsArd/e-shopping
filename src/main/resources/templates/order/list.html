@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+    <!--import all in file head.html -->
+    <th:block th:replace="~{/layout/head.html}" />
+
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+
+<!--import all in file menu.html -->
+<th:block th:replace="~{/layout/menu.html}" />
+
+<!--import all in file cart.html -->
+<th:block th:replace="~{/layout/cart.html}" />
+
+<div class="banner">
+    <div class="banner-content">
+        <div class="banner-subtitle">Trending Item</div>
+        <div class="banner-title">Women's latest fashion sale</div>
+        <div class="banner-text">starting at 20$</div>
+        <a href="" class="banner-btn">Shop now</a>
+    </div>
+</div>
+
+<main>
+
+    <!--import all in file categories.html -->
+    <th:block th:replace="~{/layout/categories.html}" />
+
+    <div class="right">
+        <div class="right-title">
+            <h3>List Order</h3>
+            <ul class="items">
+                <li class="item" th:each="item : ${listOrder}">
+                    <div class="title-item">
+                        <a style="text-decoration: none; color: black" class="item-name" th:href="@{/order/detail/{id}(id = ${item.id})}" th:text="${item.username}"></a>
+                        <div class="item-amount">Order Date: [[${item.orderDate}]]</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

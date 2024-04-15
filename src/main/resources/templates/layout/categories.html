@@ -1,0 +1,12 @@
+<div class="left">
+    <div class="list">
+        <h3>Categories</h3>
+        <ul class="titles">
+            <li class="title-items" th:each="category : ${categories}">
+                <a style="text-decoration: none; color: black" th:href="@{/products/category/{id}(id = ${category.id})}" class="title-item">
+                    <span th:text="${category.name}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

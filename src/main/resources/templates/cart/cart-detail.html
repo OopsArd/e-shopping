@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{/layout/head}" />
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+    <th:block th:replace="~{/layout/menu.html}" />
+    <th:block th:replace="~{/layout/cart.html}" />
+
+    <main>
+        <th:block th:replace="~{/layout/categories.html}" />
+        <div class="right">
+            <div class="cart-detail" th:fragment="cart-detail">
+                <h3>Your Cart</h3>
+                <table class="list-items">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in cart.products" class="item">
+                            <td class="item-content">{{product.name}}</td>
+                            <td class="item-content">
+                                <input class="item-content-input" ng-change="cart.saveToLocalStorage()" ng-model="product.count" type="number" min="1" >
+                            </td>
+                            <td class="item-content">{{product.price}}</td>
+                            <td class="item-content">{{product.count * product.price}}</td>
+                            <td class="item-content">
+                                <button class="btn-remove" ng-click="cart.removeFromCart(product.id)">
+                                    <span class="material-symbols-outlined">backspace</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="cart-options">
+                    <a th:href="@{/order/checkout}" class="btn-checkout">Checkout</a>
+                    <button ng-click="cart.clearCart()" class="btn-clear">Clear Cart</button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{/layout/head}" />
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+<th:block th:replace="~{/layout/menu.html}" />
+<th:block th:replace="~{/layout/cart.html}" />
+
+<main>
+    <th:block th:replace="~{/layout/categories.html}" />
+    <div class="right">
+        <div class="cart-detail" >
+            <h3>Your Order Detail</h3>
+            <table class="list-items">
+                <thead>
+                <tr>
+                    <th>Purchaser</th>
+                    <th>Order Date</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr class="item">
+                        <td class="item-content" th:text="${order.username}"></td>
+                        <td class="item-content" th:text="${order.orderDate}"></td>
+                        <td class="item-content" th:text="${order.address}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cart-detail">
+                <h3>List Products</h3>
+                <table class="list-items">
+                    <thead>
+                    <tr>
+                        <th>Name Products</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="item" th:each="d : ${detail}">
+                        <td class="item-content" th:text="${d.name}"></td>
+                        <td class="item-content" th:text="${d.price}"></td>
+                        <td class="item-content" th:text="${d.amount}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

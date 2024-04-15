@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="~{/layout/head}" />
+</head>
+<body ng-app="my-app" ng-controller="shopping-controller">
+
+    <!--import all in file menu.html -->
+    <th:block th:replace="~{/layout/menu.html}" />
+
+    <!--import all in file cart.html -->
+    <th:block th:replace="~{/layout/cart.html}" />
+
+    <main>
+        <th:block th:replace="~{/layout/categories.html}" />
+
+        <div class="right-checkout">
+            <!--import only fragment "cart-detail" from cart-detail.html -->
+            <div th:replace="~{/cart/cart-detail :: cart-detail }"></div>
+
+            <div class="checkout">
+                <h3>Order Purchasing</h3>
+                <form class="checkout-form">
+                    <div class="form-input">
+                        <div class="f">
+                            <label for="name">Purchaser</label>
+                            <input name="name" id="name" type="text" th:value="${userInfo}"/>
+                        </div>
+                        <div class="f">
+                            <label for="date">Order Date</label>
+                            <input name="date" id="date" type="date" value="{{order.createDate}}" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <div class="fa">
+                            <label for="address">Address</label>
+                            <textarea ng-model="order.address" name="address" id="address" rows="3" cols="3" required></textarea>
+                        </div>
+                    </div>
+                    <button ng-click="order.purchase()" class="btn-checkout">Check out</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
